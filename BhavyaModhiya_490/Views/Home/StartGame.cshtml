@@ -1,0 +1,66 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<script>
+    $(document).ready(function () {
+
+        function performAnimation() {
+            return new Promise(async (res, rej) => {
+                let flag = true;
+                setTimeout(() => {
+                    flag = false;
+                    return res()
+                }, 3000)
+                while (flag) {
+                    $('#amount-holder').text(`${parseInt(Math.random() * 101)}`);
+                    await new Promise(resolve => setTimeout(resolve, 100));
+                }
+            })
+        }
+
+        $('#Play_Game').click(function () {
+            $('#amount-holder').removeClass("text-success fw-bold");
+            $.ajax({
+                url: "/Home/PlayGame",
+                method: "GET",
+                dataType: "json",
+                success: async function (response) {
+                    if (response == -1) {   
+                        toastr.error("Can't Play, Daily's Maximun Transaction Amount reached")
+                    }
+                    else if (response == -2) {
+                        toastr.error("No More Chances Left, Buy Chances")
+                    }
+                    else {
+                        await performAnimation()
+                            .then(res => {
+                                $('#amount-holder').text(`${response}`).addClass("text-success fw-bold");
+                                toastr.success(`Earned ${response} Amount`)
+                            })
+                            .catch(err => {
+
+                            })
+                    }
+                },
+                error: function (error) {
+
+                }
+            })
+        })
+    })
+</script>
+
+<div>
+    @*Amount Earned*@
+    <div class="border p-5 mt-5 border-dark rounded-5">
+        <div class="text-center mb-5">
+            <h2 id="amount-holder" class="border p-3 w-auto border-dark rounded-5">000</h2>
+        </div>
+        <div class="d-flex justify-content-center gap-2">
+            <button id="Play_Game" type="button" class="btn btn-success">Play</button>
+            @Html.ActionLink("Buy Chances", "BuyChances", "Home", new { @class = "btn btn-primary" })
+        </div>
+    </div>
+</div>

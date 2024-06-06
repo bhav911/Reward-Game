@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="RewardGame_490ModelStoreContainer" CdmEntityContainer="RewardGame_490Entities">
+    <EntitySetMapping Name="Users">
+      <EntityTypeMapping TypeName="RewardGame_490Model.Users">
+        <MappingFragment StoreEntitySet="Users">
+          <ScalarProperty Name="userID" ColumnName="userID" />
+          <ScalarProperty Name="username" ColumnName="username" />
+          <ScalarProperty Name="email" ColumnName="email" />
+          <ScalarProperty Name="password" ColumnName="password" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Wallet">
+      <EntityTypeMapping TypeName="RewardGame_490Model.Wallet">
+        <MappingFragment StoreEntitySet="Wallet">
+          <ScalarProperty Name="walletID" ColumnName="walletID" />
+          <ScalarProperty Name="userID" ColumnName="userID" />
+          <ScalarProperty Name="balance" ColumnName="balance" />
+          <ScalarProperty Name="chancesLeft" ColumnName="chancesLeft" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="CheckTransactionLimit" FunctionName="RewardGame_490Model.Store.CheckTransactionLimit" />
+    <FunctionImportMapping FunctionImportName="getSum" FunctionName="RewardGame_490Model.Store.getSum" />
+    <EntitySetMapping Name="Transactions">
+      <EntityTypeMapping TypeName="RewardGame_490Model.Transactions">
+        <MappingFragment StoreEntitySet="Transactions">
+          <ScalarProperty Name="closingAmount" ColumnName="closingAmount" />
+          <ScalarProperty Name="transactionTime" ColumnName="transactionTime" />
+          <ScalarProperty Name="transactionType" ColumnName="transactionType" />
+          <ScalarProperty Name="transactionAmount" ColumnName="transactionAmount" />
+          <ScalarProperty Name="walletID" ColumnName="walletID" />
+          <ScalarProperty Name="transactionID" ColumnName="transactionID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

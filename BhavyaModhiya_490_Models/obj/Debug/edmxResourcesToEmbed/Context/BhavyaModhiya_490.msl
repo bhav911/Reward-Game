@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="BhavyaModhiya_490ModelStoreContainer" CdmEntityContainer="BhavyaModhiya_490Entities">
+    <EntitySetMapping Name="Transactions">
+      <EntityTypeMapping TypeName="BhavyaModhiya_490Model.Transactions">
+        <MappingFragment StoreEntitySet="Transactions">
+          <ScalarProperty Name="closingAmount" ColumnName="closingAmount" />
+          <ScalarProperty Name="transactionTime" ColumnName="transactionTime" />
+          <ScalarProperty Name="transactionType" ColumnName="transactionType" />
+          <ScalarProperty Name="transactionAmount" ColumnName="transactionAmount" />
+          <ScalarProperty Name="walletID" ColumnName="walletID" />
+          <ScalarProperty Name="transactionID" ColumnName="transactionID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Users">
+      <EntityTypeMapping TypeName="BhavyaModhiya_490Model.Users">
+        <MappingFragment StoreEntitySet="Users">
+          <ScalarProperty Name="password" ColumnName="password" />
+          <ScalarProperty Name="email" ColumnName="email" />
+          <ScalarProperty Name="username" ColumnName="username" />
+          <ScalarProperty Name="userID" ColumnName="userID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Wallet">
+      <EntityTypeMapping TypeName="BhavyaModhiya_490Model.Wallet">
+        <MappingFragment StoreEntitySet="Wallet">
+          <ScalarProperty Name="chancesLeft" ColumnName="chancesLeft" />
+          <ScalarProperty Name="balance" ColumnName="balance" />
+          <ScalarProperty Name="userID" ColumnName="userID" />
+          <ScalarProperty Name="walletID" ColumnName="walletID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

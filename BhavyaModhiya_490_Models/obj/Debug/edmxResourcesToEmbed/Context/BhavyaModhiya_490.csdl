@@ -1,0 +1,73 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="BhavyaModhiya_490Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="BhavyaModhiya_490Entities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Transactions" EntityType="BhavyaModhiya_490Model.Transactions" />
+    <EntitySet Name="Users" EntityType="BhavyaModhiya_490Model.Users" />
+    <EntitySet Name="Wallet" EntityType="BhavyaModhiya_490Model.Wallet" />
+    <AssociationSet Name="fk_transactions_walletID" Association="BhavyaModhiya_490Model.fk_transactions_walletID">
+      <End Role="Wallet" EntitySet="Wallet" />
+      <End Role="Transactions" EntitySet="Transactions" />
+    </AssociationSet>
+    <AssociationSet Name="fk_wallet_userID" Association="BhavyaModhiya_490Model.fk_wallet_userID">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="Wallet" EntitySet="Wallet" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Transactions">
+    <Key>
+      <PropertyRef Name="transactionID" />
+    </Key>
+    <Property Name="transactionID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="walletID" Type="Int32" />
+    <Property Name="transactionAmount" Type="Decimal" Precision="5" Scale="2" />
+    <Property Name="transactionType" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+    <Property Name="transactionTime" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="Wallet" Relationship="BhavyaModhiya_490Model.fk_transactions_walletID" FromRole="Transactions" ToRole="Wallet" />
+    <Property Name="closingAmount" Type="Decimal" Precision="7" Scale="2" />
+  </EntityType>
+  <EntityType Name="Users">
+    <Key>
+      <PropertyRef Name="userID" />
+    </Key>
+    <Property Name="userID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="username" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="email" Type="String" MaxLength="80" FixedLength="false" Unicode="false" />
+    <Property Name="password" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Wallet" Relationship="BhavyaModhiya_490Model.fk_wallet_userID" FromRole="Users" ToRole="Wallet" />
+  </EntityType>
+  <EntityType Name="Wallet">
+    <Key>
+      <PropertyRef Name="walletID" />
+    </Key>
+    <Property Name="walletID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="userID" Type="Int32" />
+    <Property Name="balance" Type="Decimal" Precision="7" Scale="2" />
+    <NavigationProperty Name="Transactions" Relationship="BhavyaModhiya_490Model.fk_transactions_walletID" FromRole="Wallet" ToRole="Transactions" />
+    <NavigationProperty Name="Users" Relationship="BhavyaModhiya_490Model.fk_wallet_userID" FromRole="Wallet" ToRole="Users" />
+    <Property Name="chancesLeft" Type="Byte" />
+  </EntityType>
+  <Association Name="fk_transactions_walletID">
+    <End Type="BhavyaModhiya_490Model.Wallet" Role="Wallet" Multiplicity="0..1" />
+    <End Type="BhavyaModhiya_490Model.Transactions" Role="Transactions" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Wallet">
+        <PropertyRef Name="walletID" />
+      </Principal>
+      <Dependent Role="Transactions">
+        <PropertyRef Name="walletID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_wallet_userID">
+    <End Type="BhavyaModhiya_490Model.Users" Role="Users" Multiplicity="0..1" />
+    <End Type="BhavyaModhiya_490Model.Wallet" Role="Wallet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="userID" />
+      </Principal>
+      <Dependent Role="Wallet">
+        <PropertyRef Name="userID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

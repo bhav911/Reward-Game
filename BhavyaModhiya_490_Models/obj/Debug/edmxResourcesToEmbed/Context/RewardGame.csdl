@@ -1,0 +1,80 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="RewardGame_490Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Users">
+    <Key>
+      <PropertyRef Name="userID" />
+    </Key>
+    <Property Name="userID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="username" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="email" Type="String" MaxLength="80" FixedLength="false" Unicode="false" />
+    <Property Name="password" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Wallet" Relationship="Self.fk_wallet_userid" FromRole="Users" ToRole="Wallet" />
+  </EntityType>
+  <EntityType Name="Wallet">
+    <Key>
+      <PropertyRef Name="walletID" />
+    </Key>
+    <Property Name="walletID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="userID" Type="Int32" />
+    <Property Name="balance" Type="Decimal" Precision="7" Scale="2" />
+    <Property Name="chancesLeft" Type="Int16" />
+    <NavigationProperty Name="Users" Relationship="Self.fk_wallet_userid" FromRole="Wallet" ToRole="Users" />
+    <NavigationProperty Name="Transactions" Relationship="RewardGame_490Model.fk_transactions_walletID" FromRole="Wallet" ToRole="Transactions" />
+  </EntityType>
+  <Association Name="fk_wallet_userid">
+    <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+    <End Role="Wallet" Type="Self.Wallet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="userID" />
+      </Principal>
+      <Dependent Role="Wallet">
+        <PropertyRef Name="userID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="RewardGame_490Entities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Users" EntityType="Self.Users" />
+    <EntitySet Name="Wallet" EntityType="Self.Wallet" />
+    <AssociationSet Name="fk_wallet_userid" Association="Self.fk_wallet_userid">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="Wallet" EntitySet="Wallet" />
+    </AssociationSet>
+    <FunctionImport Name="CheckTransactionLimit">
+      <Parameter Name="userID" Mode="In" Type="Int32" />
+      <Parameter Name="output" Mode="InOut" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="getSum" ReturnType="Collection(Int32)">
+      <Parameter Name="userID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <EntitySet Name="Transactions" EntityType="RewardGame_490Model.Transactions" />
+    <AssociationSet Name="fk_transactions_walletID" Association="RewardGame_490Model.fk_transactions_walletID">
+      <End Role="Wallet" EntitySet="Wallet" />
+      <End Role="Transactions" EntitySet="Transactions" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Transactions">
+    <Key>
+      <PropertyRef Name="transactionID" />
+    </Key>
+    <Property Name="transactionID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="walletID" Type="Int32" />
+    <Property Name="transactionAmount" Type="Decimal" Precision="5" Scale="2" />
+    <Property Name="transactionType" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+    <Property Name="transactionTime" Type="DateTime" Precision="3" />
+    <Property Name="closingAmount" Type="Decimal" Precision="7" Scale="2" />
+    <NavigationProperty Name="Wallet" Relationship="RewardGame_490Model.fk_transactions_walletID" FromRole="Transactions" ToRole="Wallet" />
+  </EntityType>
+  <Association Name="fk_transactions_walletID">
+    <End Type="RewardGame_490Model.Wallet" Role="Wallet" Multiplicity="0..1" />
+    <End Type="RewardGame_490Model.Transactions" Role="Transactions" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Wallet">
+        <PropertyRef Name="walletID" />
+      </Principal>
+      <Dependent Role="Transactions">
+        <PropertyRef Name="walletID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

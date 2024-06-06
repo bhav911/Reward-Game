@@ -1,0 +1,24 @@
+C:\BhavyaModhiya\BhavyaModhiya_490\BhavyaModhiya_490_Models\bin\Debug\BhavyaModhiya_490_Models.dll.config
+C:\BhavyaModhiya\BhavyaModhiya_490\BhavyaModhiya_490_Models\bin\Debug\BhavyaModhiya_490_Models.dll
+C:\BhavyaModhiya\BhavyaModhiya_490\BhavyaModhiya_490_Models\bin\Debug\BhavyaModhiya_490_Models.pdb
+C:\BhavyaModhiya\BhavyaModhiya_490\BhavyaModhiya_490_Models\bin\Debug\EntityFramework.dll
+C:\BhavyaModhiya\BhavyaModhiya_490\BhavyaModhiya_490_Models\bin\Debug\EntityFramework.SqlServer.dll
+C:\BhavyaModhiya\BhavyaModhiya_490\BhavyaModhiya_490_Models\bin\Debug\EntityFramework.xml
+C:\BhavyaModhiya\BhavyaModhiya_490\BhavyaModhiya_490_Models\bin\Debug\EntityFramework.SqlServer.xml
+C:\BhavyaModhiya\BhavyaModhiya_490\BhavyaModhiya_490_Models\obj\Debug\BhavyaModhiya_490_Models.csproj.AssemblyReference.cache
+C:\BhavyaModhiya\BhavyaModhiya_490\BhavyaModhiya_490_Models\obj\Debug\BhavyaModhiya_490_Models.csproj.CoreCompileInputs.cache
+C:\BhavyaModhiya\BhavyaModhiya_490\BhavyaModhiya_490_Models\obj\Debug\BhavyaModhiya_490_Models.csproj.CopyComplete
+C:\BhavyaModhiya\BhavyaModhiya_490\BhavyaModhiya_490_Models\obj\Debug\BhavyaModhiya_490_Models.dll
+C:\BhavyaModhiya\BhavyaModhiya_490\BhavyaModhiya_490_Models\obj\Debug\BhavyaModhiya_490_Models.pdb
+C:\Bhavya_Modhiya\Training_tasks\dotnet training codes\BhavyaModhiya_490\BhavyaModhiya_490_Models\bin\Debug\BhavyaModhiya_490_Models.dll.config
+C:\Bhavya_Modhiya\Training_tasks\dotnet training codes\BhavyaModhiya_490\BhavyaModhiya_490_Models\bin\Debug\BhavyaModhiya_490_Models.dll
+C:\Bhavya_Modhiya\Training_tasks\dotnet training codes\BhavyaModhiya_490\BhavyaModhiya_490_Models\bin\Debug\BhavyaModhiya_490_Models.pdb
+C:\Bhavya_Modhiya\Training_tasks\dotnet training codes\BhavyaModhiya_490\BhavyaModhiya_490_Models\bin\Debug\EntityFramework.dll
+C:\Bhavya_Modhiya\Training_tasks\dotnet training codes\BhavyaModhiya_490\BhavyaModhiya_490_Models\bin\Debug\EntityFramework.SqlServer.dll
+C:\Bhavya_Modhiya\Training_tasks\dotnet training codes\BhavyaModhiya_490\BhavyaModhiya_490_Models\bin\Debug\EntityFramework.xml
+C:\Bhavya_Modhiya\Training_tasks\dotnet training codes\BhavyaModhiya_490\BhavyaModhiya_490_Models\bin\Debug\EntityFramework.SqlServer.xml
+C:\Bhavya_Modhiya\Training_tasks\dotnet training codes\BhavyaModhiya_490\BhavyaModhiya_490_Models\obj\Debug\BhavyaModhiya_490_Models.csproj.AssemblyReference.cache
+C:\Bhavya_Modhiya\Training_tasks\dotnet training codes\BhavyaModhiya_490\BhavyaModhiya_490_Models\obj\Debug\BhavyaModhiya_490_Models.csproj.CoreCompileInputs.cache
+C:\Bhavya_Modhiya\Training_tasks\dotnet training codes\BhavyaModhiya_490\BhavyaModhiya_490_Models\obj\Debug\BhavyaModhiya_490_Models.csproj.CopyComplete
+C:\Bhavya_Modhiya\Training_tasks\dotnet training codes\BhavyaModhiya_490\BhavyaModhiya_490_Models\obj\Debug\BhavyaModhiya_490_Models.dll
+C:\Bhavya_Modhiya\Training_tasks\dotnet training codes\BhavyaModhiya_490\BhavyaModhiya_490_Models\obj\Debug\BhavyaModhiya_490_Models.pdb

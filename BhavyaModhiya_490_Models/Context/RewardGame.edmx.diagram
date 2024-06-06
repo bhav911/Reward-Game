@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="73236b20dcfc4af4a51c3314c2404c12" Name="Diagram1">
+        <EntityTypeShape EntityType="RewardGame_490Model.Users" Width="1.5" PointX="0.75" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="RewardGame_490Model.Wallet" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <AssociationConnector Association="RewardGame_490Model.fk_wallet_userid" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="RewardGame_490Model.Transactions" Width="1.5" PointX="5.25" PointY="0.875" />
+        <AssociationConnector Association="RewardGame_490Model.fk_transactions_walletID" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
