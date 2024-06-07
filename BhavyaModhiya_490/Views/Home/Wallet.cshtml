@@ -7,38 +7,48 @@
 
 <div>
     @*balance*@
-    <div class="d-flex gap-3 justify-content-between my-5 align-items-center">
+    <div class="d-flex gap-3 justify-content-between mt-5 mb-3 align-items-center">
         <div class="d-flex gap-3">
-            <div class="border border-success p-3 bg-success-subtle rounded-5 w-50">    
+            <div class="border border-success p-3 bg-success-subtle rounded-5 w-50">
                 <h3 class="text-black fs-5">Current Balance</h3>
                 @{
                     if (Model.balance > 0)
                     {
-                        <h3 class="text-success fw-bold fs-5">@Model.balance</h3>
+                        <h3 class="text-success fw-bold fs-3">@Model.balance</h3>
                     }
                     else
                     {
-                        <h3 class="text-danger fw-bold fs-5">@Model.balance</h3>
+                        <h3 class="text-danger fw-bold fs-3">@Model.balance</h3>
                     }
                 }
             </div>
             <div class="border border-primary p-3 bg-primary-subtle rounded-5 w-50">
                 <h3 class="text-black fs-5">Today's Earning</h3>
                 @{
-                    <h3 class="text-primary fw-bold fs-5">@Model.TodaysEarning</h3>
+                    <h3 class="text-primary fw-bold fs-3">@Model.TodaysEarning</h3>
                 }
             </div>
             <div class="border border-warning p-3 bg-warning-subtle rounded-5 w-50">
                 <h3 class="text-black fs-5">Chances Left</h3>
                 @{
-                    <h3 class="text-warning fw-bold fs-5">@Model.chancesLeft</h3>
+                    <h3 class="text-warning fw-bold fs-3">@Model.chancesLeft</h3>
                 }
             </div>
         </div>
-        <div>
-            @Html.ActionLink("Buy Chances", "BuyChances", "Home", new { @class = "btn btn-primary" })
+        <div class="text-end">
+            <button class="btn btn-primary mb-1 buy-btn" active="false" id="buy-btn">Buy Chance</button>
+            <div class="d-none" id="confirm-toast">
+                <div class="d-flex align-items-end gap-1 flex-column">
+                    <div class="d-flex gap-1">
+                        <a href="/Home/BuyChances?home=true" class="btn btn-success btn-sm"><i class="fa-solid fa-check"></i></a>
+                        <a class="btn btn-danger btn-sm" onclick="closeConfirmation()"><i class="fa-solid fa-xmark"></i></a>
+                    </div>
+                    <p class="mb-0"><small class="text-danger"><strong>20</strong> Amount Will be Debited</small></p>
+                </div>
+            </div>
         </div>
     </div>
+    <p>Your Daily's Earning Limit is <strong class="text-primary">500</strong></p>
 
     <div class="d-flex gap-2 justify-content-end mb-4">
         @{
@@ -89,3 +99,29 @@
         </table>
     </div>
 </div>
+
+
+<script>
+    $('#buy-btn').on('click', function () {
+        debugger
+        if ($(this).attr('active') == "true") {
+            $(this).attr('active', "false").text("Buy Chance")
+            $('#confirm-toast').toggleClass("d-block d-none");
+        }
+        else {
+            $(this).attr('active', "true").text("Confirm Buy?")
+            $('#confirm-toast').toggleClass("d-block d-none");
+        }
+    })
+
+
+    $('body').on('click', closeConfirmation)
+
+    function closeConfirmation(event) {
+        let ele = event.target;
+        if ($(ele).attr('id') != "buy-btn") {
+            $('#buy-btn').attr('active', "false").text("Buy Chance")
+            $('#confirm-toast').addClass("d-none").removeClass("d-block");
+        }
+    }
+</script>

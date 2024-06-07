@@ -44,6 +44,10 @@ namespace BhavyaModhiya_490_Repository.Services
         {
             try
             {
+                Users user = _dbContext.Users.FirstOrDefault(q => q.userID == userID);
+                Wallet userWallet = user.Wallet.FirstOrDefault();
+                userWallet.chancesLeft--;
+                _dbContext.SaveChanges();
                 Dictionary<string, object> parameters = new Dictionary<string, object>();
                 parameters.Add("@userID", userID);
                 DataTable result = SqlSPHelper.SqlStoredProcedure("getSum", parameters);
@@ -75,7 +79,6 @@ namespace BhavyaModhiya_490_Repository.Services
                 };
                 _dbContext.Transactions.Add(transactions);
                 wallet.balance += amount;
-                wallet.chancesLeft--;
                 _dbContext.SaveChanges();
                 return true;
             }
@@ -91,9 +94,13 @@ namespace BhavyaModhiya_490_Repository.Services
             return wallet.chancesLeft > 0;
         }
 
-        public bool BuyChances(int userID)
+        public int BuyChances(int userID)
         {
             Wallet wallet = _dbContext.Wallet.FirstOrDefault(q => q.userID == userID);
+            if(wallet.chancesLeft >= 1)
+            {
+                return -2;
+            }
             if(wallet.balance >= 20)
             {
                 Transactions transactions = new Transactions()
@@ -108,9 +115,9 @@ namespace BhavyaModhiya_490_Repository.Services
                 wallet.balance = wallet.balance - 20;
                 wallet.chancesLeft++;
                 _dbContext.SaveChanges();
-                return true;
+                return 1;
             }
-            return false;
+            return -1;
         }
     }
 }

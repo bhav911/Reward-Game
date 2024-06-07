@@ -62,21 +62,32 @@ namespace BhavyaModhiya_490.Controllers
             return number;
         }
 
-        public async Task<ActionResult> BuyChances()
-        {
+        public async Task<ActionResult> BuyChances(string home)
+        {            
             string response = await WebAPIHelper.HttpGetRequestResponse($"api/HomeAPI/BuyChances?userID={UserSession.UserID}");
-            bool status = JsonConvert.DeserializeObject<bool>(response);
-            if (status)
+            int status = JsonConvert.DeserializeObject<int>(response);
+            if (status == 1)
             {
                 TempData["success"] = "Bought 1 Chance";
-
+            }
+            else if(status == -1)
+            {
+                TempData["error"] = "Does not have enough balance";
             }
             else
             {
-                TempData["error"] = "Does not have enough balance";
-
+                TempData["error"] = "Already have a chance";
             }
-            return RedirectToAction("Wallet");
+            if (home.Equals("true"))
+            {
+                return RedirectToAction("Wallet");
+            }
+            return View("StartGame");
+        }
+
+        public ActionResult Unauthorize()
+        {
+            return View("Error");
         }
 
     }

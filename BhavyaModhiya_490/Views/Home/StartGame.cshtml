@@ -3,6 +3,30 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+<div class=" w-50 mx-auto p-3 mt-5">
+    @*Amount Earned*@
+    <div class="text-end">
+        <button class="btn btn-primary mb-1 buy-btn" active="false" id="buy-btn">Buy Chance</button>
+        <div class="invisible" id="confirm-toast">
+            <div class="d-flex align-items-end gap-1 flex-column">
+                <div class="d-flex gap-1">
+                    <a href="/Home/BuyChances?home=false" class="btn btn-success btn-sm"><i class="fa-solid fa-check"></i></a>
+                    <a class="btn btn-danger btn-sm" onclick="closeConfirmation()"><i class="fa-solid fa-xmark"></i></a>
+                </div>
+                <p class="mb-0"><small class="text-danger"><strong>20</strong> Amount Will be Debited</small></p>
+            </div>
+        </div>
+    </div>
+    <div class="border p-5 mt-5 border-dark rounded-5">
+        <div class="text-center mb-5">
+            <h2 id="amount-holder" class="border p-3 w-auto border-dark rounded-5">--Bet Your Luck--</h2>
+        </div>
+        <div class="d-flex justify-content-center gap-2">
+            <button id="Play_Game" type="button" class="btn btn-success">Play</button>
+        </div>
+    </div>
+</div>
+
 <script>
     $(document).ready(function () {
 
@@ -21,13 +45,15 @@
         }
 
         $('#Play_Game').click(function () {
+            $(this).prop('disabled', true);
             $('#amount-holder').removeClass("text-success fw-bold");
+            $('#amount-holder').text("--Bet Your Luck--");
             $.ajax({
                 url: "/Home/PlayGame",
                 method: "GET",
                 dataType: "json",
                 success: async function (response) {
-                    if (response == -1) {   
+                    if (response == -1) {
                         toastr.error("Can't Play, Daily's Maximun Transaction Amount reached")
                     }
                     else if (response == -2) {
@@ -38,11 +64,13 @@
                             .then(res => {
                                 $('#amount-holder').text(`${response}`).addClass("text-success fw-bold");
                                 toastr.success(`Earned ${response} Amount`)
+                                $('#Play_Game').prop('disabled', false);
                             })
                             .catch(err => {
 
                             })
                     }
+                    $('#Play_Game').prop('disabled', false);
                 },
                 error: function (error) {
 
@@ -50,17 +78,27 @@
             })
         })
     })
+    $('#buy-btn').on('click', function () {
+        debugger
+        if ($(this).attr('active') == "true") {
+            $(this).attr('active', "false").text("Buy Chance")
+            $('#confirm-toast').toggleClass("invisible");
+        }
+        else {
+            $(this).attr('active', "true").text("Confirm Buy?")
+            $('#confirm-toast').toggleClass("invisible");
+        }
+    })
+
+
+    $('body').on('click', closeConfirmation)
+
+    function closeConfirmation(event) {
+        let ele = event.target;
+        if ($(ele).attr('id') != "buy-btn") {
+            $('#buy-btn').attr('active', "false").text("Buy Chance")
+            $('#confirm-toast').addClass("invisible");
+        }
+    }
 </script>
 
-<div>
-    @*Amount Earned*@
-    <div class="border p-5 mt-5 border-dark rounded-5">
-        <div class="text-center mb-5">
-            <h2 id="amount-holder" class="border p-3 w-auto border-dark rounded-5">000</h2>
-        </div>
-        <div class="d-flex justify-content-center gap-2">
-            <button id="Play_Game" type="button" class="btn btn-success">Play</button>
-            @Html.ActionLink("Buy Chances", "BuyChances", "Home", new { @class = "btn btn-primary" })
-        </div>
-    </div>
-</div>

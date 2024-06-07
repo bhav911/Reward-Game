@@ -50,9 +50,9 @@ namespace BhavyaModhiya_490_WebAPI.Controllers
 
         [HttpGet]
         [Route("api/HomeAPI/BuyChances")]
-        public bool BuyChances(int userID)
+        public int BuyChances(int userID)
         {
-            bool status = _wallet.BuyChances(userID);
+            int status = _wallet.BuyChances(userID);
             return status;
         }
     }

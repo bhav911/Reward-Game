@@ -12,7 +12,7 @@ namespace BhavyaModhiya_490_Models.CustomModels
         public int UserID { get; set; }
 
         [Required]
-        [RegularExpression("^[a-z0-9_]{5,18}$", ErrorMessage = "Alphanumeric string that may include _ having a length of 3 to 18 characters")]
+        [RegularExpression("^[A-Za-z0-9_ ]{5,18}$", ErrorMessage = "Alphanumeric string that may include _ having a length of 3 to 18 characters")]
         public string Username { get; set; }
 
         [Required]
