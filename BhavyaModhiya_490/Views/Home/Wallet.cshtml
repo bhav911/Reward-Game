@@ -38,8 +38,8 @@
         <div class="text-end">
             <button class="btn btn-primary mb-1 buy-btn" active="false" id="buy-btn">Buy Chance</button>
             <div class="d-none" id="confirm-toast">
-                <div class="d-flex align-items-end gap-1 flex-column">
-                    <div class="d-flex gap-1">
+                <div class="d-flex align-items-end gap-2 flex-column">
+                    <div class="d-flex gap-2">
                         <a href="/Home/BuyChances?home=true" class="btn btn-success btn-sm"><i class="fa-solid fa-check"></i></a>
                         <a class="btn btn-danger btn-sm" onclick="closeConfirmation()"><i class="fa-solid fa-xmark"></i></a>
                     </div>
@@ -48,20 +48,43 @@
             </div>
         </div>
     </div>
-    <p>Your Daily's Earning Limit is <strong class="text-primary">500</strong></p>
+    <p>Your Daily's Earning Limit is <strong class="text-primary fs-3">500</strong></p>
 
-    <div class="d-flex gap-2 justify-content-end mb-4">
+    <div class="d-flex gap-1 justify-content-end mb-4">
+        <form id="pageNumberForm" method="post">
+            <input name="pageNumber" hidden id="pageNumberHolder" />
+        </form>
         @{
+            if (Model.pages.CurrentPage != 1)
+            {
+                <a value="1" class="btn btn-primary pageAnchor p-2 btn-sm">&lt;&lt;</a>
+                <a value="@(Model.pages.CurrentPage - 1)" class="btn btn-primary pageAnchor btn-sm p-2">&lt;</a>
+            }
+            else
+            {
+                <button class="btn btn-primary p-2 btn-sm" disabled>&lt;&lt;</button>
+                <button class="btn btn-primary btn-sm p-2" disabled>&lt;</button>
+            }
             for (int i = 1; i <= Model.pages.TotalPages; i++)
             {
                 if (@i == Model.pages.CurrentPage)
                 {
-                    <a href="#" class="btn btn-primary">@i</a>
+                    <a href="" class="btn btn-primary btn-sm p-2">@i</a>
                 }
                 else
                 {
-                    <a href="/Home/Wallet?pageNumber=@i" class="btn btn-primary">@i</a>
+                    <a value="@i" class="btn btn-secondary pageAnchor btn-sm p-2">@i</a>
                 }
+            }
+            if (Model.pages.CurrentPage != Model.pages.TotalPages)
+            {
+                <a value="@(Model.pages.CurrentPage + 1)" class="btn btn-primary pageAnchor btn-sm p-2">&gt;</a>
+                <a value="@Model.pages.TotalPages" class="btn btn-primary pageAnchor p-2 btn-sm">&gt;&gt;</a>
+            }
+            else
+            {
+                <button class="btn btn-primary btn-sm p-2" disabled>&gt;</button>
+                <button class="btn btn-primary p-2 btn-sm" disabled>&gt;&gt;</button>
             }
         }
     </div>
@@ -102,6 +125,14 @@
 
 
 <script>
+
+    $('.pageAnchor').on('click', function () {
+        debugger
+        let id = $(this).attr('value');
+        $('#pageNumberHolder').val(id);
+        $('#pageNumberForm').submit();
+    })
+
     $('#buy-btn').on('click', function () {
         debugger
         if ($(this).attr('active') == "true") {

@@ -73,7 +73,10 @@
                     $('#Play_Game').prop('disabled', false);
                 },
                 error: function (error) {
-
+                    debugger
+                    let anchor = $('<a>').attr('href', '/Login/SignIn');
+                    $('body').append(anchor);
+                    $(anchor)[0].click();
                 }
             })
         })

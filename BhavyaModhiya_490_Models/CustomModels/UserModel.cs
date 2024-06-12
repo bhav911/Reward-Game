@@ -26,5 +26,7 @@ namespace BhavyaModhiya_490_Models.CustomModels
         [Required]
         [Compare("Password", ErrorMessage ="Password Does Not Match")]
         public string ConfirmPassword { get; set; }
+
+        public string token { get; set; }
     }
 }

@@ -13,11 +13,18 @@ namespace BhavyaModhiya_490.CommonWebAPI
     {
         public static async Task<string> HttpGetRequestResponse(string url)
         {
-            using(HttpClient client = new HttpClient())
+            using(HttpClient client = new HttpClient(new HttpClientHandler { UseCookies = false }))
             {
                 client.BaseAddress = new Uri("http://localhost:63961/");
                 client.DefaultRequestHeaders.Clear();
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+                string jwtToken = HttpContext.Current.Request.Cookies["jwt"]?.Value;
+
+                if (!string.IsNullOrEmpty(jwtToken))
+                {
+                    client.DefaultRequestHeaders.Add("Cookie", $"jwt={jwtToken}");
+                }
 
                 HttpResponseMessage response = await client.GetAsync(url);
 

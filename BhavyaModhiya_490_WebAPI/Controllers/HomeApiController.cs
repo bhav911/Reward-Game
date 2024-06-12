@@ -3,6 +3,7 @@ using BhavyaModhiya_490_Helpers.ModelConverters;
 using BhavyaModhiya_490_Models.Context;
 using BhavyaModhiya_490_Models.CustomModels;
 using BhavyaModhiya_490_Repository.Services;
+using BhavyaModhiya_490_WebAPI.JWTauthentication;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,6 +20,7 @@ namespace BhavyaModhiya_490_WebAPI.Controllers
 
         [HttpGet]
         [Route("api/HomeAPI/GetWalletDetails")]
+        [JwtAuthentication]
         public WalletModel GetWalletDetails(int userID, int currentPage = 1)
         {
             Wallet wallet = _wallet.GetWalletDetails(userID);
@@ -29,6 +31,7 @@ namespace BhavyaModhiya_490_WebAPI.Controllers
 
         [HttpGet]
         [Route("api/HomeAPI/IsAmountCrossingLimit")]
+        [JwtAuthentication]
         public bool IsAmountCrossingLimit(int userID, int amount)
         {
             bool isAmountCrossed = _wallet.checkLimit(userID, amount);
@@ -42,14 +45,16 @@ namespace BhavyaModhiya_490_WebAPI.Controllers
 
         [HttpGet]
         [Route("api/HomeAPI/CheckIfChancesAreLeft")]
+        [JwtAuthentication]
         public bool CheckIfChancesAreLeft(int userID)
         {
-            bool areChancesLeft = _wallet.checkChances(userID);            
+            bool areChancesLeft = _wallet.checkChances(userID);
             return areChancesLeft;
         }
 
         [HttpGet]
         [Route("api/HomeAPI/BuyChances")]
+        [JwtAuthentication]
         public int BuyChances(int userID)
         {
             int status = _wallet.BuyChances(userID);

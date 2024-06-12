@@ -23,6 +23,8 @@ namespace BhavyaModhiya_490.Controllers
         public async Task<ActionResult> Wallet(int pageNumber = 1)
         {
             string response = await WebAPIHelper.HttpGetRequestResponse($"api/HomeAPI/GetWalletDetails?userID={UserSession.UserID}&currentPage={pageNumber}");
+            if (response == null)
+                return RedirectToAction("SignIn", "Login");
             WalletModel wallet = JsonConvert.DeserializeObject<WalletModel>(response);
             return View(wallet);
         }
@@ -30,6 +32,8 @@ namespace BhavyaModhiya_490.Controllers
         public async Task<JsonResult> PlayGame()
         {
             string response = await WebAPIHelper.HttpGetRequestResponse($"api/HomeAPI/CheckIfChancesAreLeft?userID={UserSession.UserID}");
+            if(response == null)
+                return Json(null, JsonRequestBehavior.AllowGet);
             bool status = JsonConvert.DeserializeObject<bool>(response);
             if (!status)
             {
@@ -65,6 +69,8 @@ namespace BhavyaModhiya_490.Controllers
         public async Task<ActionResult> BuyChances(string home)
         {            
             string response = await WebAPIHelper.HttpGetRequestResponse($"api/HomeAPI/BuyChances?userID={UserSession.UserID}");
+            if (response == null)
+                return RedirectToAction("SignIn", "Login");
             int status = JsonConvert.DeserializeObject<int>(response);
             if (status == 1)
             {
